@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block play %}
+
+<!-- whitenoise -->
+<script src="static/js/main.js"></script>
+
+<h3> {{ title }} </h3>
+   <audio controls preload="none" class="audioDemo">
+           <source src="static/music/{{ music_file }}" type="audio/mp3">
+           Your browser does not support this audio format.
+   </audio>
+
+   <div>
+       <div>
+           <div>
+               <p>
+                   <button class="start" type="button">Start Audio</button>
+                   <button class="fade" type="button">Fade Audio</button>
+               </p>
+           </div>
+           <div>
+               <p>
+                   <button class="pause" type="button">Pause Audio</button>
+                   <button class="stop" type="button">Stop Audio</button>
+               </p>
+           </div>
+       </div>
+       
+       <div>
+           <div>
+               <p>
+                   <button class="volume-up" type="button">Volume Up</button>
+                   <button class="volume-down" type="button">Volume Down</button>
+               </p>
+           </div>
+           <div>
+               <p>
+                   <button class="mute" type="button">Toggle Volume On/Off</button>
+               </p>
+           </div>
+   
+       </div>
+   </div>
+
+{% endblock %}
