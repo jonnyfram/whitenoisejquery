@@ -1,4 +1,5 @@
 var audio;
+var audio2;
 
 function addEventHandlers(){
     $("button.start").click(startAudio);
@@ -12,6 +13,18 @@ function addEventHandlers(){
     $("button.mute").click(toggleMuteAudio);
     $("button.bgchangeNight").click(bgChangeNight);
     $("button.bgchangeDay").click(bgChangeDay);
+    $("button.timeupdate").click(fader);
+}
+
+//seamlessly loops via animated volume
+//POC for looping audio between two samples
+function fader(){
+    audio.trigger('play');
+    audio.animate({volume: 0.0}, 10000);
+    audio2.prop("volume", 0.00);
+    audio2.prop("currentTime",10);
+    audio2.trigger('play');
+    audio2.animate({volume: 1.0}, 10000);
 }
 
 function bgChangeNight(){
@@ -38,11 +51,13 @@ function fadeAudio(){
 
 function pauseAudio(){
     audio.trigger('pause');
+    audio2.trigger('pause');
 }
 
 function stopAudio(){
     pauseAudio();
     audio.prop("currentTime",0);
+    audio2.prop("currentTime",0);
 }
 
 function forwardAudio(){
@@ -77,8 +92,35 @@ function toggleMuteAudio(){
     audio.prop("muted",!audio.prop("muted"));
 }
 
+function timeUpdate() {
+    alert("timeupdate");
+    var progress = audio.prop("currentTime") / audio.prop("duration");
+    if (progress < 0.5 && !fadeOut) {
+        fadeOut = true;
+        audio.animate({volume: 0.0}, 10000, function () {
+            alert("fade out completed" + " " + progress);
+        });
+        /*var audio2 = new Audio("static/music/Rain-storm.mp3");
+        audio2.trigger('play');
+        audio2.animate({volume: 1.0}, 10000);*/
+    }
+    if (progress > 0.5 && !fadeIn) {
+        fadeIn = true;
+        audio.animate({volume: 1.0}, 10000, function() {
+            alert("fade in completed" + " " + progress);
+            var audio2 = new Audio("static/music/Rain-storm.mp3");
+            audio2.trigger('play');
+            audio2.animate({volume: 1.0}, 10000);
+        });
+    }
+}
+
+var fadeIn = false;
+var fadeOut = false;
+
 $(document).ready(function(){
     audio = $(".audioDemo");
+    audio2 = $(".audio2");
     addEventHandlers();
     
     //loop audio
@@ -86,4 +128,5 @@ $(document).ready(function(){
           //alert('playing file ended')
             startAudio();
        });
+
 });//be careful with these tokens
