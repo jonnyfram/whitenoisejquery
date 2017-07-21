@@ -77,13 +77,13 @@ function toggleMuteAudio(){
     audio.prop("muted",!audio.prop("muted"));
 }
 
-$(document).ready(function() {
+$(document).ready(function(){
     audio = $(".audioDemo");
     addEventHandlers();
     
     //loop audio
-    audio.on('ended', function() {
+    audio.on('ended', function(){
           //alert('playing file ended')
             startAudio();
        });
-}
+});//be careful with these tokens
