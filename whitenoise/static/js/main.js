@@ -10,31 +10,25 @@ function addEventHandlers(){
     $("button.volume-up").click(volumeUp);
     $("button.volume-down").click(volumeDown);
     $("button.mute").click(toggleMuteAudio);
+    $("button.bgchangeNight").click(bgChangeNight);
+    $("button.bgchangeDay").click(bgChangeDay);
+}
+
+function bgChangeNight(){
+    //alert("bgchange activated");
+    $('body').css('background-color', 'black').css('color', '#fff');
+}
+
+function bgChangeDay(){
+    //alert("bgchange activated");
+    //changes body colour and text
+    $('body').css('background-color', 'white').css('color', 'black');
 }
 
 function startAudio(){
-    
     audio.trigger('play');
-    
-    //audio.controls = true;
-    //audio.loop = true;
-    //audio.autoplay = true;
-    //document.body.appendChild(audio);
-    
-    //audio.addEventListener('ended', function(){
-    //$("button.start").html("Play");
-    //});
-    
-    // fade over 20 secs:
-    //audio.animate({volume: 0.0}, 20000);
-    
-    //var song = audio;
-    //song.loop = true;
-    //document.body.appendChild(song);
-    
 }
 
-//test fade
 function fadeAudio(){
     //play the audio, set vol to 0, fade (anim) audio volume
     audio.prop("volume",0.0);
@@ -87,32 +81,9 @@ $(document).ready(function() {
     audio = $(".audioDemo");
     addEventHandlers();
     
-    //loop the audio (working)
+    //loop audio
     audio.on('ended', function() {
-          alert('playing file ended')
+          //alert('playing file ended')
             startAudio();
        });
-       
-    var audio2 = new Audio("static/music/Rain-storm.mp3");
-    audio2.startAudio();
-    alert("should have started audio2")
-    // attempt to get curr time create new audio element for looping
-    
-    // the length number could be changed and argumentalised for setting the fade
-    audio.on("timeupdate", function() {
-        if (audio.currentTime > 10) {
-            alert("audio longer than 10!")
-            audio.animate({volume: 0.0}, 10000);
-        } else if (audio.currentTime < 10) {
-            audio.animate({volume: 1.0}, 1000);
-        }
-    });
-
-});
-
-///test
-//$(document).on('click', '.fade', function() {
-//    audio.prop("muted",!audio.prop("muted"));
-//});
-
-
+}

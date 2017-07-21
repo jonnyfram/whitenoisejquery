@@ -27,6 +27,11 @@ header {
     font-size: 2em;
 }
 
+h3 {
+    font-size:12em;
+    font-color:'white';
+}
+
 div#wrapper {
     height: 100%;
     padding-bottom: 128px;
