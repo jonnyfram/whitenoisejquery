@@ -3,29 +3,77 @@
 
 <!-- whitenoise -->
 <script src="static/js/main.js"></script>
+<head>
+<style>
+div.container {
+    width: 100%;
+}
 
-<h3> {{ title }} </h3>
+header, footer{
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: left;
+    width: 100%;
+}
+
+nav.soundlist {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav.soundlist ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav.soundlist ul a {
+    text-decoration: none;
+}
+
+body {
+    margin-left: 0px;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
+</head>
+
+<div class="container">
+
+<header>
+<h2>White Noise App</h2>
+</header>
+
+<body>
+<h3>Sound: {{ title }} </h3>
    <audio controls preload="none" class="audioDemo">
            <source src="static/music/{{ music_file }}" type="audio/mp3">
            Your browser does not support this audio format.
    </audio>
+    <p>
     <audio controls preload="none" class="audio2">
            <source src="static/music/{{ music_file }}" type="audio/mp3">
            Your browser does not support this audio format.
    </audio>
-
+    </p>
    <div>
        <div>
            <div>
                <p>
                    <button class="start" type="button">Start Audio</button>
                    <button class="fade" type="button">Fade Audio</button>
+                   <button class="pause" type="button">Pause Audio</button>
                </p>
            </div>
            <div>
                <p>
-                   <button class="pause" type="button">Pause Audio</button>
                    <button class="stop" type="button">Stop Audio</button>
+                   <button class="volume-up" type="button">Volume Up</button>
+                   <button class="volume-down" type="button">Volume Down</button>
                </p>
            </div>
        </div>
@@ -33,20 +81,28 @@
        <div>
            <div>
                <p>
-                   <button class="volume-up" type="button">Volume Up</button>
-                   <button class="volume-down" type="button">Volume Down</button>
+                <button class="bgchangeNight" type="button">Night Mode</button>
+                <button class="bgchangeDay" type="button">Day Mode</button>
+                <button class="timeupdate" type="button">Fader</button>
                </p>
            </div>
            <div>
                <p>
-                   <button class="mute" type="button">Toggle Volume On/Off</button>
-                   <button class="bgchangeNight" type="button">Night Mode</button>
-                   <button class="bgchangeDay" type="button">Day Mode</button>
-                   <button class="timeupdate" type="button">Fader</button>
+                <button class="mute" type="button">Toggle Volume On/Off</button>
                </p>
            </div>
-   
        </div>
    </div>
 
+<nav class="soundlist">
+    Change sound:
+  <ul>
+    <li>{% for i in range(music_files_number) %}
+    <p><a href="/{{ music_files[i] }}"> {{ i+1 }}) {{ music_files[i] }} </a></p>
+{% endfor %}</li>
+  </ul>
+</nav>
+</div>
 {% endblock %}
+</body>
+</html>

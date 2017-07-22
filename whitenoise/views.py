@@ -16,6 +16,10 @@ def index():
 
 @app.route('/<filename>')
 def play_song(filename):
+    music_dir = os.path.join(app.root_path, 'static', 'music')
+    music_files = [f for f in os.listdir(music_dir) if f.endswith('mp3')]
+    music_files_number = len(music_files)
     return render_template('play.html',
-                           title = filename,
-                           music_file = filename)
+                           title = filename[:-10],
+                           music_file = filename, music_files_number = music_files_number,
+                           music_files = music_files)

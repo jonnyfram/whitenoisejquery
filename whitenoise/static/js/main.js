@@ -100,9 +100,6 @@ function timeUpdate() {
         audio.animate({volume: 0.0}, 10000, function () {
             alert("fade out completed" + " " + progress);
         });
-        /*var audio2 = new Audio("static/music/Rain-storm.mp3");
-        audio2.trigger('play');
-        audio2.animate({volume: 1.0}, 10000);*/
     }
     if (progress > 0.5 && !fadeIn) {
         fadeIn = true;
