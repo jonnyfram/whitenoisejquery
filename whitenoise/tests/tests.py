@@ -9,11 +9,21 @@ from splinter import Browser
 
 os.environ["CONFIG_PATH"] = "whitenoise.config.DevelopmentConfig"
 
-from . import app
-
-#from whitenoise import app
+from whitenoise import app
 
 class TestViews(unittest.TestCase):
+
+    def setUp(self):
+        """ Test setup """
+        self.browser = Browser("phantomjs")
+        self.process = multiprocessing.Process(target=app.run,
+                                               kwargs={"port": 8080})
+        self.process.start()
+        time.sleep(1)
+
+    def tearDown(self):
+        self.process.terminate()
+        self.browser.quit()
     
     def test_landing(self):
             self.browser.visit("http://127.0.0.1:8080/")

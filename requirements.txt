@@ -9,3 +9,4 @@ itsdangerous==0.24
 jsonschema==2.6.0
 nose==1.3.7
 psycopg2==2.7.1
+PhantomJS

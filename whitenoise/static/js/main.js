@@ -93,19 +93,18 @@ function toggleMuteAudio(){
 }
 
 function timeUpdate() {
-    alert("timeupdate");
     var progress = audio.prop("currentTime") / audio.prop("duration");
     if (progress < 0.5 && !fadeOut) {
         fadeOut = true;
         audio.animate({volume: 0.0}, 10000, function () {
-            alert("fade out completed" + " " + progress);
+            //alert("fade out completed" + " " + progress);
         });
     }
     if (progress > 0.5 && !fadeIn) {
         fadeIn = true;
         audio.animate({volume: 1.0}, 10000, function() {
-            alert("fade in completed" + " " + progress);
-            var audio2 = new Audio("static/music/Rain-storm.mp3");
+            //alert("fade in completed" + " " + progress);
+            audio2.attr("src", "static/music/Lava-sound.mp3");
             audio2.trigger('play');
             audio2.animate({volume: 1.0}, 10000);
         });
@@ -119,11 +118,7 @@ $(document).ready(function(){
     audio = $(".audioDemo");
     audio2 = $(".audio2");
     addEventHandlers();
-    
-    //loop audio
-    audio.on('ended', function(){
-          //alert('playing file ended')
-            startAudio();
-       });
+
+    audio.bind('timeupdate', timeUpdate);
 
 });//be careful with these tokens
